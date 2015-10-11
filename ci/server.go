@@ -10,6 +10,11 @@ import (
 	"golang.org/x/oauth2"
 )
 
+var (
+	integrationName  = "ben-ci"
+	rebaseDescripton = "Check if rebased"
+)
+
 // ListenAndServe runs new http server for ben-ci.
 func ListenAndServe() {
 	http.HandleFunc("/gh_hook", githubHook)
@@ -43,31 +48,17 @@ func githubHook(w http.ResponseWriter, r *http.Request) {
 
 func lint(event github.PullRequestEvent) error {
 	client := newGithubClient()
-	ok, err := rebased(client, event.PullRequest)
+	status, err := rebasedStatus(client, event.PullRequest)
 	if err != nil {
 		return err
 	}
-
-	// TODO clean the mess with RepoStatus
-	var status github.RepoStatus
-	var res string
-	if ok {
-		res = "success"
-	} else {
-		res = "failure"
-	}
-	desc := "Check if rebased"
-	context := "ben-ci"
-	status.State = &res
-	status.Description = &desc
-	status.Context = &context
 
 	_, _, err = client.Repositories.CreateStatus(*event.Repo.Owner.Login, *event.Repo.Name, *event.PullRequest.Head.SHA, &status)
 	return err
 }
 
 // TODO take info from event maybe
-func rebased(client *github.Client, pr *github.PullRequest) (bool, error) {
+func rebasedStatus(client *github.Client, pr *github.PullRequest) (github.RepoStatus, error) {
 	base := *pr.Base.Label
 	head := *pr.Head.Label
 	owner := *pr.Base.Repo.Owner.Login
@@ -75,10 +66,18 @@ func rebased(client *github.Client, pr *github.PullRequest) (bool, error) {
 
 	comp, _, err := client.Repositories.CompareCommits(owner, repo, base, head)
 	if err != nil {
-		return false, fmt.Errorf("Error during comparing commits: %s", err)
+		return github.RepoStatus{}, fmt.Errorf("Error during comparing commits: %s", err)
 	}
 
-	return *comp.BehindBy == 0, nil
+	rebased := *comp.BehindBy == 0
+
+	var status github.RepoStatus
+	state := map[bool]string{true: "success", false: "failure"}[rebased]
+	status.State = &state
+	status.Description = &rebaseDescripton
+	status.Context = &integrationName
+
+	return status, nil
 }
 
 func newGithubClient() *github.Client {
