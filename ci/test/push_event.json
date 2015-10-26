@@ -1,0 +1,153 @@
+{
+    "ref": "refs/heads/rebased-branch",
+    "before": "6feae08b5d1a80ea123556fb950215a152aab0f5",
+    "after": "5d0b7d35cfe1d435269aff0ec47131e56b03fed9",
+    "created": false,
+    "deleted": false,
+    "forced": true,
+    "base_ref": null,
+    "compare": "https://github.com/eicca/ci-test-repo/compare/6feae08b5d1a...5d0b7d35cfe1",
+    "commits": [
+        {
+            "id": "5d0b7d35cfe1d435269aff0ec47131e56b03fed9",
+            "distinct": true,
+            "message": "Update readme v3.",
+            "timestamp": "2015-10-25T15:35:45+01:00",
+            "url": "https://github.com/eicca/ci-test-repo/commit/5d0b7d35cfe1d435269aff0ec47131e56b03fed9",
+            "author": {
+                "name": "Mr Foo",
+                "email": "foobar@gmail.com",
+                "username": "eicca"
+            },
+            "committer": {
+                "name": "Mr Foo",
+                "email": "foobar@gmail.com",
+                "username": "eicca"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                "README.md"
+            ]
+        }
+    ],
+    "head_commit": {
+        "id": "5d0b7d35cfe1d435269aff0ec47131e56b03fed9",
+        "distinct": true,
+        "message": "Update readme v3.",
+        "timestamp": "2015-10-25T15:35:45+01:00",
+        "url": "https://github.com/eicca/ci-test-repo/commit/5d0b7d35cfe1d435269aff0ec47131e56b03fed9",
+        "author": {
+            "name": "Mr Foo",
+            "email": "foobar@gmail.com",
+            "username": "eicca"
+        },
+        "committer": {
+            "name": "Mr Foo",
+            "email": "foobar@gmail.com",
+            "username": "eicca"
+        },
+        "added": [],
+        "removed": [],
+        "modified": [
+            "README.md"
+        ]
+    },
+    "repository": {
+        "id": 43631966,
+        "name": "ci-test-repo",
+        "full_name": "eicca/ci-test-repo",
+        "owner": {
+            "name": "eicca",
+            "email": "foobar@gmail.com"
+        },
+        "private": false,
+        "html_url": "https://github.com/eicca/ci-test-repo",
+        "description": "",
+        "fork": false,
+        "url": "https://github.com/eicca/ci-test-repo",
+        "forks_url": "https://api.github.com/repos/eicca/ci-test-repo/forks",
+        "keys_url": "https://api.github.com/repos/eicca/ci-test-repo/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/eicca/ci-test-repo/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/eicca/ci-test-repo/teams",
+        "hooks_url": "https://api.github.com/repos/eicca/ci-test-repo/hooks",
+        "issue_events_url": "https://api.github.com/repos/eicca/ci-test-repo/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/eicca/ci-test-repo/events",
+        "assignees_url": "https://api.github.com/repos/eicca/ci-test-repo/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/eicca/ci-test-repo/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/eicca/ci-test-repo/tags",
+        "blobs_url": "https://api.github.com/repos/eicca/ci-test-repo/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/eicca/ci-test-repo/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/eicca/ci-test-repo/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/eicca/ci-test-repo/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/eicca/ci-test-repo/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/eicca/ci-test-repo/languages",
+        "stargazers_url": "https://api.github.com/repos/eicca/ci-test-repo/stargazers",
+        "contributors_url": "https://api.github.com/repos/eicca/ci-test-repo/contributors",
+        "subscribers_url": "https://api.github.com/repos/eicca/ci-test-repo/subscribers",
+        "subscription_url": "https://api.github.com/repos/eicca/ci-test-repo/subscription",
+        "commits_url": "https://api.github.com/repos/eicca/ci-test-repo/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/eicca/ci-test-repo/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/eicca/ci-test-repo/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/eicca/ci-test-repo/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/eicca/ci-test-repo/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/eicca/ci-test-repo/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/eicca/ci-test-repo/merges",
+        "archive_url": "https://api.github.com/repos/eicca/ci-test-repo/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/eicca/ci-test-repo/downloads",
+        "issues_url": "https://api.github.com/repos/eicca/ci-test-repo/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/eicca/ci-test-repo/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/eicca/ci-test-repo/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/eicca/ci-test-repo/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/eicca/ci-test-repo/labels{/name}",
+        "releases_url": "https://api.github.com/repos/eicca/ci-test-repo/releases{/id}",
+        "created_at": 1443952621,
+        "updated_at": "2015-10-04T09:57:01Z",
+        "pushed_at": 1445783754,
+        "git_url": "git://github.com/eicca/ci-test-repo.git",
+        "ssh_url": "git@github.com:eicca/ci-test-repo.git",
+        "clone_url": "https://github.com/eicca/ci-test-repo.git",
+        "svn_url": "https://github.com/eicca/ci-test-repo",
+        "homepage": null,
+        "size": 168,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": null,
+        "has_issues": true,
+        "has_downloads": true,
+        "has_wiki": true,
+        "has_pages": false,
+        "forks_count": 0,
+        "mirror_url": null,
+        "open_issues_count": 1,
+        "forks": 0,
+        "open_issues": 1,
+        "watchers": 0,
+        "default_branch": "master",
+        "stargazers": 0,
+        "master_branch": "master"
+    },
+    "pusher": {
+        "name": "eicca",
+        "email": "foobar@gmail.com"
+    },
+    "sender": {
+        "login": "eicca",
+        "id": 1145007,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1145007?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/eicca",
+        "html_url": "https://github.com/eicca",
+        "followers_url": "https://api.github.com/users/eicca/followers",
+        "following_url": "https://api.github.com/users/eicca/following{/other_user}",
+        "gists_url": "https://api.github.com/users/eicca/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/eicca/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/eicca/subscriptions",
+        "organizations_url": "https://api.github.com/users/eicca/orgs",
+        "repos_url": "https://api.github.com/users/eicca/repos",
+        "events_url": "https://api.github.com/users/eicca/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/eicca/received_events",
+        "type": "User",
+        "site_admin": false
+    }
+}

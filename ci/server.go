@@ -4,22 +4,25 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/google/go-github/github"
 	"io"
 )
 
+const (
+	eventPush        = "push"
+	eventPullRequest = "pull_request"
+)
+
 var eventHandlers = map[string]func(*json.Decoder) error{
-	"push":         processPushEvent,
-	"pull_request": processPullRequestEvent,
+	eventPush:        processPushEvent,
+	eventPullRequest: processPullRequestEvent,
 }
 
 // ListenAndServe runs new http server for ben-ci.
-func ListenAndServe() {
+func ListenAndServe(port string) {
 	http.HandleFunc("/gh_hook", ghHookHandler)
 
-	port := ":" + os.Getenv("LISTENER_PORT")
 	fmt.Printf("CI listens for hooks on http://127.0.0.1%s\n", port)
 	fmt.Println(http.ListenAndServe(port, nil))
 }
