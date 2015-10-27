@@ -1,3 +1,8 @@
+## Installation
+```
+go get github.com/eicca/ben-ci
+```
+
 ## Run app
 ```
 cp .env.example .env
