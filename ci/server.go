@@ -43,6 +43,7 @@ func ghHookHandler(w http.ResponseWriter, r *http.Request) {
 
 func processHook(eventType string, body io.Reader) error {
 	decoder := json.NewDecoder(body)
+
 	fn, ok := eventHandlers[eventType]
 	if !ok {
 		return fmt.Errorf("ci: unrecognized type of the event: %s", eventType)

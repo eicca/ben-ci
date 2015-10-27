@@ -24,6 +24,14 @@ func TestPushEvent(t *testing.T) {
 	}
 }
 
+func TestPullRequestEvent(t *testing.T) {
+	err := sendEvent(eventPullRequest)
+	if err != nil {
+		t.Error(err)
+	}
+	// TODO check the actual status here
+}
+
 func sendEvent(eventType string) error {
 	filename := fmt.Sprintf("test/%s_event.json", eventType)
 	f, err := os.Open(filename)
@@ -38,7 +46,7 @@ func sendEvent(eventType string) error {
 
 	req.Header = map[string][]string{
 		"Content-Type":   {"application/json"},
-		"X-Github-Event": {"push"},
+		"X-Github-Event": {eventType},
 	}
 
 	resp, err := http.DefaultClient.Do(req)
