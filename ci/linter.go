@@ -55,8 +55,7 @@ func (l *Linter) processPushEvent(decoder *json.Decoder) error {
 	}
 
 	// By default it returns all open PRs sorted by creation date.
-	prs, _, err := l.client.PullRequests.List(*event.Repo.Owner.Name, *event.Repo.Name,
-		&github.PullRequestListOptions{})
+	prs, _, err := l.client.PullRequests.List(*event.Repo.Owner.Name, *event.Repo.Name, nil)
 	if err != nil {
 		return err
 	}
@@ -81,13 +80,6 @@ func (l *Linter) processPullRequestEvent(decoder *json.Decoder) error {
 		return err
 	}
 
-	// TODO here it's better to run linting in another goroutine
-	// and post result or error to commit gh status.
-	linter := NewLinter()
-	return linter.lint(event)
-}
-
-func (l *Linter) lint(event github.PullRequestEvent) error {
 	status, err := l.rebasedStatus(event.PullRequest)
 	if err != nil {
 		return err
