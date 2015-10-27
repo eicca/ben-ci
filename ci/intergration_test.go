@@ -2,6 +2,7 @@ package ci
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"testing"
@@ -54,9 +55,12 @@ func sendEvent(eventType string) error {
 		return fmt.Errorf("error after sending %s: %s", filename, err)
 	}
 
+	content, _ := ioutil.ReadAll(resp.Body)
+	resp.Body.Close()
+
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("wrong status after sending %s: got %d, expected %d",
-			filename, resp.StatusCode, http.StatusOK)
+		return fmt.Errorf("wrong status after sending %s: got %d, expected %d.\nResponse: %s",
+			filename, resp.StatusCode, http.StatusOK, content)
 	}
 
 	return nil
