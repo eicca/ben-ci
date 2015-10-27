@@ -1,11 +1,18 @@
 package ci
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
+)
+
+const (
+	eventPush        = "push"
+	eventPullRequest = "pull_request"
 )
 
 var (
@@ -25,8 +32,62 @@ func NewLinter() *Linter {
 	return &l
 }
 
-// Lint checks if the PR was rebased againts master.
-func (l *Linter) Lint(event github.PullRequestEvent) error {
+// ProcessHook performs specific linter logic depending on the event type.
+func (l *Linter) ProcessHook(eventType string, body io.Reader) error {
+	eventHandlers := map[string]func(*json.Decoder) error{
+		eventPush:        l.processPushEvent,
+		eventPullRequest: l.processPullRequestEvent,
+	}
+
+	decoder := json.NewDecoder(body)
+	fn, ok := eventHandlers[eventType]
+	if !ok {
+		return fmt.Errorf("ci: unrecognized type of the event: %s", eventType)
+	}
+
+	return fn(decoder)
+}
+
+func (l *Linter) processPushEvent(decoder *json.Decoder) error {
+	event := github.PushEvent{}
+	if err := decoder.Decode(&event); err != nil {
+		return err
+	}
+
+	// By default it returns all open PRs sorted by creation date.
+	prs, _, err := l.client.PullRequests.List(*event.Repo.Owner.Name, *event.Repo.Name,
+		&github.PullRequestListOptions{})
+	if err != nil {
+		return err
+	}
+
+	for _, pr := range prs {
+		status, err := l.rebasedStatus(&pr)
+		if err != nil {
+			return err
+		}
+
+		_, _, err = l.client.Repositories.CreateStatus(*event.Repo.Owner.Name, *event.Repo.Name, *pr.Head.SHA, &status)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (l *Linter) processPullRequestEvent(decoder *json.Decoder) error {
+	event := github.PullRequestEvent{}
+	if err := decoder.Decode(&event); err != nil {
+		return err
+	}
+
+	// TODO here it's better to run linting in another goroutine
+	// and post result or error to commit gh status.
+	linter := NewLinter()
+	return linter.lint(event)
+}
+
+func (l *Linter) lint(event github.PullRequestEvent) error {
 	status, err := l.rebasedStatus(event.PullRequest)
 	if err != nil {
 		return err
